@@ -5,7 +5,7 @@ const itemFilter = document.getElementById("filter")
 const clearButton = document.getElementById("clear")
 const items = itemList.querySelectorAll("li")
 
-function addItem(e) {
+function onAddItemSubmit(e) {
     e.preventDefault();
     const newItem = itemInput.value
     //Validate input
@@ -15,9 +15,26 @@ function addItem(e) {
         return
     }
 //Create list item
-    const li = document.createElement('li')
-    li.appendChild(document.createTextNode(newItem))
+    // const li = document.createElement('li')
+    // li.appendChild(document.createTextNode(newItem))
+    // // const li = document.createElement('li');
+    // // li.innerText = newItem; // Or li.textContent = newItem
+    // const button = createButton('remove-item btn-link text-red')
+    // li.appendChild(button)
 
+    // //add li to DOM
+    // itemList.appendChild(li)
+
+    addItemToDOM(newItem)
+
+    addItemtoStorage(newItem)
+
+    checkUI()
+    itemInput.value = ''
+}
+function addItemToDOM(item){
+    const li = document.createElement('li')
+    li.appendChild(document.createTextNode(item))
     // const li = document.createElement('li');
     // li.innerText = newItem; // Or li.textContent = newItem
     const button = createButton('remove-item btn-link text-red')
@@ -25,11 +42,21 @@ function addItem(e) {
 
     //add li to DOM
     itemList.appendChild(li)
-    checkUI()
-    itemInput.value = ''
-    
-    
-    
+}
+
+function addItemtoStorage(item){
+    let itemsFromStorage
+    if (localStorage.getItem('items') === null) {
+        itemsFromStorage = []
+
+    }
+    else{
+        itemsFromStorage = JSON.parse(localStorage.getItem('items'))
+    }
+
+    itemsFromStorage.push(item)
+
+    localStorage.setItem('items', JSON.stringify(itemsFromStorage))
 }
 
 function createButton(classes)
@@ -103,7 +130,7 @@ function checkUI(){
 }
 
 //Event Listeners
-itemForm.addEventListener('submit', addItem)
+itemForm.addEventListener('submit', onAddItemSubmit)
 itemList.addEventListener('click', removeItem)
 clearButton.addEventListener('click', clearItems)
 itemFilter.addEventListener('input', filterItems)
