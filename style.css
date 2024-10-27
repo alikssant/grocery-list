@@ -101,6 +101,10 @@ img {
   cursor: pointer;
 }
 
+.edit-mode {
+  color: #ccc;
+}
+
 .btn-clear:hover {
   background-color: #f1f1f1;
 }
