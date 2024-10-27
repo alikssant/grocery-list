@@ -5,6 +5,9 @@ const itemFilter = document.getElementById("filter")
 const clearButton = document.getElementById("clear")
 const items = itemList.querySelectorAll("li")
 const formControl = document.querySelector(".form-control")
+const formBtn = itemForm.querySelector('button')
+let isEditMode = false
+
 
 function displayItems(){
     const itemsFromStorage = getItemFromStorage()
@@ -105,6 +108,19 @@ function onClickItem(e){
     if (e.target.parentElement.classList.contains('remove-item')){
         removeItem(e.target.parentElement.parentElement)
     }
+    else {
+        setItemtoEdit(e.target)
+    }
+}
+
+function setItemtoEdit(item){
+    isEditMode = true
+    itemList.querySelectorAll('li').forEach((i) => i.style.color = "")
+    item.style.color = '#ccc'
+    formBtn.innerHTML = '<i class="fa-solid fa-pen"></i>Update Item'
+    formBtn.style.backgroundColor = '#228822'
+    itemInput.value = item.textContent
+
 }
 
 function removeItem(item){
