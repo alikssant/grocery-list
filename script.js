@@ -13,7 +13,7 @@ function displayItems(){
 }
 
 itemInput.addEventListener('focus', () => {
-    itemInput.style.border = "2px solid green"
+    itemInput.style.border = "4px solid green"
 });
 itemInput.addEventListener('blur', () => {
     itemInput.style.border = ""
@@ -101,26 +101,56 @@ function getItemFromStorage(){
 
 }
 
-
-function removeItem(e){
-    if (e.target.parentElement.classList.contains('remove-item'))
-    {
-        if (confirm("Are you sure to delete?")) {
-            e.target.parentElement.parentElement.remove()
-
-            checkUI()
-        }
-       
+function onClickItem(e){
+    if (e.target.parentElement.classList.contains('remove-item')){
+        removeItem(e.target.parentElement.parentElement)
     }
+}
+
+function removeItem(item){
+    if (confirm('Are you sure?')) {
+        //Remove item from DOM
+        item.remove()
+
+        //Remove item from storage
+        removeItemFromStorage(item.textContent)
+        checkUI()
+    }
+    
+    // if (e.target.parentElement.classList.contains('remove-item'))
+    // {
+    //     if (confirm("Are you sure to delete?")) {
+    //         e.target.parentElement.parentElement.remove()
+
+    //         checkUI()
+    //     }
+       
+    // }
+
+}
+
+function removeItemFromStorage(item){
+    let itemsFromStorage = getItemFromStorage()
+
+    //Filter out item to be removed
+
+    itemsFromStorage = itemsFromStorage.filter((i) => i !== item)
+    
+    //re-set to localStorage
+
+    localStorage.setItem('items', JSON.stringify(itemsFromStorage))
 
 }
 
 function clearItems(){
-   
-   while(itemList.firstChild){
-    itemList.removeChild(itemList.firstChild)
-   }
-   checkUI()
+    if (confirm('Are you sure to delete all of items?')) {
+        while(itemList.firstChild){
+            itemList.removeChild(itemList.firstChild)
+        }
+        //Clear from LocalStorage
+        localStorage.removeItem('items')
+        checkUI()
+    }
 }
 
 function filterItems(e){
@@ -155,7 +185,7 @@ function checkUI(){
 
 //Event Listeners
 itemForm.addEventListener('submit', onAddItemSubmit)
-itemList.addEventListener('click', removeItem)
+itemList.addEventListener('click', onClickItem)
 clearButton.addEventListener('click', clearItems)
 itemFilter.addEventListener('input', filterItems)
 document.addEventListener('DOMContentLoaded', displayItems)
