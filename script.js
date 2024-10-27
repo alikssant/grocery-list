@@ -4,6 +4,21 @@ const itemList = document.getElementById("item-list")
 const itemFilter = document.getElementById("filter")
 const clearButton = document.getElementById("clear")
 const items = itemList.querySelectorAll("li")
+const formControl = document.querySelector(".form-control")
+
+function displayItems(){
+    const itemsFromStorage = getItemFromStorage()
+    itemsFromStorage.forEach(item => addItemToDOM(item))
+    checkUI()
+}
+
+itemInput.addEventListener('focus', () => {
+    itemInput.style.border = "2px solid green"
+});
+itemInput.addEventListener('blur', () => {
+    itemInput.style.border = ""
+});
+
 
 function onAddItemSubmit(e) {
     e.preventDefault();
@@ -45,14 +60,8 @@ function addItemToDOM(item){
 }
 
 function addItemtoStorage(item){
-    let itemsFromStorage
-    if (localStorage.getItem('items') === null) {
-        itemsFromStorage = []
-
-    }
-    else{
-        itemsFromStorage = JSON.parse(localStorage.getItem('items'))
-    }
+    const itemsFromStorage = getItemFromStorage()
+   
 
     itemsFromStorage.push(item)
 
@@ -75,6 +84,21 @@ function createIcon(classes)
     const icon = document.createElement('i')
     icon.className = classes
     return icon
+}
+
+function getItemFromStorage(){
+    let itemsFromStorage
+    if (localStorage.getItem('items') === null) {
+        itemsFromStorage = []
+
+    }
+    else{
+        itemsFromStorage = JSON.parse(localStorage.getItem('items'))
+    }
+
+    return itemsFromStorage
+
+
 }
 
 
@@ -134,5 +158,6 @@ itemForm.addEventListener('submit', onAddItemSubmit)
 itemList.addEventListener('click', removeItem)
 clearButton.addEventListener('click', clearItems)
 itemFilter.addEventListener('input', filterItems)
+document.addEventListener('DOMContentLoaded', displayItems)
 
 checkUI()
