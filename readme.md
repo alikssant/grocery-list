@@ -10,3 +10,6 @@ Simple grocery list app first Js project to get familiar with DOM manupilation
 
 * Filter items
 * Add to localStorage
+
+
+#Preview:  https://brilliant-tapioca-cd99f2.netlify.app/
