@@ -6,7 +6,7 @@ const clearButton = document.getElementById("clear")
 const items = itemList.querySelectorAll("li")
 const formControl = document.querySelector(".form-control")
 const formBtn = itemForm.querySelector('button')
-let isEditMode = false
+//let isEditMode = false
 
 
 function displayItems(){
@@ -32,24 +32,21 @@ function onAddItemSubmit(e) {
         alert("Please add an item")
         return
     }
-//Create list item
-    // const li = document.createElement('li')
-    // li.appendChild(document.createTextNode(newItem))
-    // // const li = document.createElement('li');
-    // // li.innerText = newItem; // Or li.textContent = newItem
-    // const button = createButton('remove-item btn-link text-red')
-    // li.appendChild(button)
-
-    // //add li to DOM
-    // itemList.appendChild(li)
-
     addItemToDOM(newItem)
 
     addItemtoStorage(newItem)
-
     checkUI()
     itemInput.value = ''
 }
+
+// if (isEditMode) {
+//     const itemToEdit = itemList.querySelector('.edit-mode')
+//     removeItemFromStorage(itemToEdit.textContent)
+//     itemToEdit.classList.remove('edit-mode')
+//     itemToEdit.remove()
+//     isEditMode = false
+    
+// }
 function addItemToDOM(item){
     const li = document.createElement('li')
     li.appendChild(document.createTextNode(item))
@@ -113,15 +110,23 @@ function onClickItem(e){
     }
 }
 
-function setItemtoEdit(item){
-    isEditMode = true
-    itemList.querySelectorAll('li').forEach((i) => i.style.color = "")
-    item.style.color = '#ccc'
-    formBtn.innerHTML = '<i class="fa-solid fa-pen"></i>Update Item'
-    formBtn.style.backgroundColor = '#228822'
-    itemInput.value = item.textContent
+// function setItemtoEdit(item){
+//     // isEditMode = true
+//     // itemList.querySelectorAll('li').forEach((i) => i.style.color = "")
+//     // item.style.color = '#ccc'
+//     // formBtn.innerHTML = '<i class="fa-solid fa-pen"></i>Update Item'
+//     // formBtn.style.backgroundColor = '#228822'
+//     // itemInput.value = item.textContent
+//     isEditMode = true;
 
-}
+//   itemList.querySelectorAll('li').forEach((i) => i.classList.remove('edit-mode'));
+
+//   item.classList.add('edit-mode');
+//   formBtn.innerHTML = '<i class="fa-solid fa-pen"></i>   Update Item';
+//   formBtn.style.backgroundColor = '#228B22';
+//   itemInput.value = item.textContent;
+
+// }
 
 function removeItem(item){
     if (confirm('Are you sure?')) {
