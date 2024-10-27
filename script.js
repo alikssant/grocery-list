@@ -39,14 +39,6 @@ function onAddItemSubmit(e) {
     itemInput.value = ''
 }
 
-// if (isEditMode) {
-//     const itemToEdit = itemList.querySelector('.edit-mode')
-//     removeItemFromStorage(itemToEdit.textContent)
-//     itemToEdit.classList.remove('edit-mode')
-//     itemToEdit.remove()
-//     isEditMode = false
-    
-// }
 function addItemToDOM(item){
     const li = document.createElement('li')
     li.appendChild(document.createTextNode(item))
@@ -138,15 +130,6 @@ function removeItem(item){
         checkUI()
     }
     
-    // if (e.target.parentElement.classList.contains('remove-item'))
-    // {
-    //     if (confirm("Are you sure to delete?")) {
-    //         e.target.parentElement.parentElement.remove()
-
-    //         checkUI()
-    //     }
-       
-    // }
 
 }
 
