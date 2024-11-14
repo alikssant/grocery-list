@@ -1,8 +1,8 @@
-#Grocery List
+### Grocery List
 
 Simple grocery list app first Js project to get familiar with DOM manupilation
 
-#Functions
+### Functions
 
 - Add items to list
 - Remove items from list by clicking "x" button
@@ -12,4 +12,4 @@ Simple grocery list app first Js project to get familiar with DOM manupilation
 * Add to localStorage
 
 
-#Preview:  https://brilliant-tapioca-cd99f2.netlify.app/
+### Preview:  [GroceryList-Demo](https://brilliant-tapioca-cd99f2.netlify.app/)
